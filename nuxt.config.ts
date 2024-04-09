@@ -3,7 +3,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["nuxt-primevue"],
   primevue: {
-    cssLayerOrder: "reset,primevue",
+    cssLayerOrder: "tailwind-base, primevue, tailwind-utilities",
   },
-  css: ["primevue/resources/themes/aura-light-green/theme.css"],
+  css: [
+    "~/assets/css/main.css",
+    "primevue/resources/themes/aura-light-green/theme.css",
+  ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 });
