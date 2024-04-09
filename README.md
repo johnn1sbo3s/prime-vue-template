@@ -1,11 +1,11 @@
 # Nuxt + TailwindCSS + PrimeVue
 
-** Este projeto já está configurado e pronto para uso. Apenas clone o repositório e instale as dependências **
+**Este projeto já está configurado e pronto para uso. Apenas clone o repositório e instale as dependências**
 ``` bash
 npm install
 ```
 
-** A documentação a seguir é um guia para a instalação das 3 dependências a partir do zero. **
+**A documentação a seguir é um guia para a instalação das 3 dependências a partir do zero.**
 
 ## Inicialização de um novo projeto
 
