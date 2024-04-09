@@ -1,41 +1,27 @@
-# Nuxt 3 Minimal Starter
+# Nuxt + TailwindCSS + PrimeVue
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
+# Este projeto já está configurado e pronto para uso. Apenas clone o repositório e instale as dependências
+``` bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+# A documentação a seguir é um guia para a instalação das 3 dependências a partir do zero.
 
-Start the development server on `http://localhost:3000`:
+## Inicialização de um novo projeto
+
+Crie um novo projeto a partir do CLI do Nuxt, usando:
 
 ```bash
-# npm
-npm run dev
+npx nuxi@latest init <nome-do-projeto>
+```
 
-# pnpm
-pnpm run dev
+## Instale o PrimeVue Styled a partir do [tutorial oficial](https://primevue.org/nuxt/).
 
-# yarn
-yarn dev
+Instalando o PrimeVue
 
-# bun
-bun run dev
+```bash
+npm install primevue
+npm install --save-dev nuxt-primevue
 ```
 
 ## Production
