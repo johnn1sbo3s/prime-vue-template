@@ -1,15 +1,15 @@
 # Nuxt + TailwindCSS + PrimeVue
 
-# Este projeto já está configurado e pronto para uso. Apenas clone o repositório e instale as dependências
+## Este projeto já está configurado e pronto para uso. Apenas clone o repositório e instale as dependências
 ``` bash
 npm install
 ```
 
-# A documentação a seguir é um guia para a instalação das 3 dependências a partir do zero.
+## A documentação a seguir é um guia para a instalação das 3 dependências a partir do zero.
 
 ## Inicialização de um novo projeto
 
-Crie um novo projeto a partir do CLI do Nuxt, usando:
+Considerando que o Nuxt já está instalado, crie um novo projeto a partir do CLI do Nuxt, usando:
 
 ```bash
 npx nuxi@latest init <nome-do-projeto>
@@ -24,38 +24,138 @@ npm install primevue
 npm install --save-dev nuxt-primevue
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+Adicione o módulo do PrimeVue ao arquivo **nuxt.config.ts**
+``` bash
+export default defineNuxtConfig({
+    modules: [
+        'nuxt-primevue'
+    ],
+    primevue: {
+        /* Options */
+    }
+})
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+Entre os [temas disponíveis](https://primevue.org/theming/) no PrimeVue, adicione o de sua escolha no mesmo arquivo **nuxt.config.ts**
+``` bash
+export default defineNuxtConfig({
+    modules: [
+        'nuxt-primevue'
+    ],
+    primevue: {
+        /* Options */
+    },
+    css: ['primevue/resources/themes/aura-light-green/theme.css'],
+})
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+A partir de agora, os componentes do PrimeVue já estão disponíveis para uso.
+``` bash
+<Button label="Click me!" />
+```
+
+Agora, vamos instalar o Tailwind CSS.
+
+## Instalando o Tailwind CSS
+
+Seguindo a [documentação oficial](https://tailwindcss.com/docs/guides/nuxtjs#standard), começamos a instalação com os seguintes comandos:
+``` bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+```
+
+Adicione o Tailwind à configuração de postcss.plugins no arquivo **nuxt.config.ts**
+``` bash
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+})
+```
+
+Adicione todos os caminhos de template no arquivo **tailwind.config.js**
+``` bash
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./app.vue",
+    "./error.vue",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Crie uma pasta **assets/css** e um arquivo **main.css** dentro dela, com o seguinte código:
+``` bash
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+```
+
+Adicione o caminho à configuração de CSS no arquivo **nuxt.config.ts**
+``` bash
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  modules: ["nuxt-primevue"],
+  primevue: {
+    /* Options */
+  },
+  css: [
+    "~/assets/css/main.css",
+    "primevue/resources/themes/aura-light-green/theme.css",
+  ],
+  ...
+```
+
+Finalmente, adicione o CSSLayer do PrimeVue ao arquivo de configuração **nuxt.config.ts**
+``` bash
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  modules: ["nuxt-primevue"],
+  primevue: {
+    cssLayerOrder: "tailwind-base, primevue, tailwind-utilities",
+  },
+  ...
+```
+
+Ao final de tudo, teremos um **nuxt.config.ts** assim:
+``` bash
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  modules: ["nuxt-primevue"],
+  primevue: {
+    cssLayerOrder: "tailwind-base, primevue, tailwind-utilities",
+  },
+  css: [
+    "~/assets/css/main.css",
+    "primevue/resources/themes/aura-light-green/theme.css",
+  ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+});
+```
+
+E pronto! Nosso projeto já está configurado, usando Nuxt, TailwindCSS e PrimeVue.
